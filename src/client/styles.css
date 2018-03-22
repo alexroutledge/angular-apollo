@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~font-awesome/css/font-awesome.css';
+@import '~vdl-angular/flexboxgrid/flexboxgrid.min.css';
+@import '~vdl-angular/prebuilt-themes/deeppurple-amber.css';
+@import '~vdl-angular/prebuilt-themes/vdl-global.css';
+
+
+html, body, app {
+  width: 100%;
+  height: 100%;
+  background-color: #f3f3f3;
+
+
+}
+app {
+    display: block;
+}
+
+.vdl-global-help button {
+    pointer-events: none;
+    opacity: 0.35;
+    color: #004677;
+    background-color: transparent;
+    border-color: transparent;
+}
