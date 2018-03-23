@@ -22,6 +22,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { VdlRootModule } from 'vdl-angular';
 import { ROUTES } from './app.routes';
 import { RouterModule } from '@angular/router';
+import 'hammerjs';
 
 @NgModule({
   declarations: [
