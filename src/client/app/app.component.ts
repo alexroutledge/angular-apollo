@@ -1,17 +1,16 @@
 /*
- * Copyright (c) 2018 Veritas Technologies LLC.
+ * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
  */
 
 import { Component } from '@angular/core';
-import { VdlIconRegistry } from 'vdl-angular';
 
 @Component({
   selector: 'angular-starter-kit-app',
@@ -19,7 +18,4 @@ import { VdlIconRegistry } from 'vdl-angular';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private vdlIconRegistry: VdlIconRegistry) {
-    vdlIconRegistry.registerFontClassAlias('fontawesome', 'fa');
-  }
 }

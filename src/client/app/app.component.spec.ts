@@ -1,26 +1,21 @@
 /*
- * Copyright (c) 2018 Veritas Technologies LLC.
+ * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
  */
 
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TranslateFakeLoader, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { VdlIconRegistry, VdlRootModule } from 'vdl-angular';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
-
-  const mockVdlIconRegistry: VdlIconRegistry = jasmine.createSpyObj(
-    'mockVdlIconRegistry', ['registerFontClassAlias', 'addSvgIcon']
-  );
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,12 +25,9 @@ describe('AppComponent', () => {
       imports: [
         TranslateModule.forRoot({
           loader: { provide: TranslateLoader, useClass: TranslateFakeLoader }
-        }),
-        VdlRootModule
+        })
       ],
-      providers: [
-        { provide: VdlIconRegistry, useValue: mockVdlIconRegistry }
-      ],
+      providers: [],
       schemas: [
         NO_ERRORS_SCHEMA
       ]

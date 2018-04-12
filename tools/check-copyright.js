@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2017-2018 Veritas Technologies LLC.
+ * Copyright (c) 2017-2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
  */
 
 var path   = require('path');
@@ -16,32 +16,32 @@ var globby = require('globby');
 
 var HEADER_HTML =
       '<!--\n' +
-      ' * Copyright (c) 2018 Veritas Technologies LLC.\n' +
+      ' * Copyright (c) 2018 Company Name.\n' +
       ' * All rights reserved.\n' +
       ' *\n' +
-      ' * Veritas and the Veritas Logo are trademarks\n' +
-      ' * or registered trademarks of Veritas Technologies LLC\n' +
+      ' * Company Name and the Company Name logo are trademarks\n' +
+      ' * or registered trademarks of Company Name\n' +
       ' * or its affiliates in the U.S. and other countries.\n' +
       ' * Other names may be trademarks of their respective owners.\n' +
       ' *\n' +
-      ' * IV49-4028-9371-66-15-7\n' +
+      ' * WATERMARK\n' +
       '-->';
 
 var HEADER_OTHERS =
       '/*\n' +
-      ' * Copyright (c) 2018 Veritas Technologies LLC.\n' +
+      ' * Copyright (c) 2018 Company Name.\n' +
       ' * All rights reserved.\n' +
       ' *\n' +
-      ' * Veritas and the Veritas Logo are trademarks\n' +
-      ' * or registered trademarks of Veritas Technologies LLC\n' +
+      ' * Company Name and the Company Name logo are trademarks\n' +
+      ' * or registered trademarks of Company Name\n' +
       ' * or its affiliates in the U.S. and other countries.\n' +
       ' * Other names may be trademarks of their respective owners.\n' +
       ' *\n' +
-      ' * IV49-4028-9371-66-15-7\n' +
+      ' * WATERMARK\n' +
       ' */';
 
-var HEADER_HTML_REGEX    = /^\/\*\r?\n \* Copyright \(c\) 201[78](-2018)? Veritas Technologies LLC.\r?\n \* All rights reserved.\r?\n \*\r?\n \* Veritas and the Veritas Logo are trademarks\r?\n \* or registered trademarks of Veritas Technologies LLC\r?\n \* or its affiliates in the U.S. and other countries.\r?\n \* Other names may be trademarks of their respective owners.\r?\n \*\r?\n \* IV49-4028-9371-66-15-7\r?\n \*\//;
-var HEADER2_OTHERS_REGEX = /^<!--\r?\n \* Copyright \(c\) 201[78](-2018)? Veritas Technologies LLC.\r?\n \* All rights reserved.\r?\n \*\r?\n \* Veritas and the Veritas Logo are trademarks\r?\n \* or registered trademarks of Veritas Technologies LLC\r?\n \* or its affiliates in the U.S. and other countries.\r?\n \* Other names may be trademarks of their respective owners.\r?\n \*\r?\n \* IV49-4028-9371-66-15-7\r?\n-->/;
+var HEADER_HTML_REGEX    = /^\/\*\r?\n \* Copyright \(c\) 201[78](-2018)? Company Name.\r?\n \* All rights reserved.\r?\n \*\r?\n \* Company Name and the Company Name logo are trademarks\r?\n \* or registered trademarks of Company Name\r?\n \* or its affiliates in the U.S. and other countries.\r?\n \* Other names may be trademarks of their respective owners.\r?\n \*\r?\n \* WATERMARK\r?\n \*\//;
+var HEADER2_OTHERS_REGEX = /^<!--\r?\n \* Copyright \(c\) 201[78](-2018)? Company Name.\r?\n \* All rights reserved.\r?\n \*\r?\n \* Company Name and the Company Name logo are trademarks\r?\n \* or registered trademarks of Company Name\r?\n \* or its affiliates in the U.S. and other countries.\r?\n \* Other names may be trademarks of their respective owners.\r?\n \*\r?\n \* WATERMARK\r?\n-->/;
 
 runProgram();
 

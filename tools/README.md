@@ -18,45 +18,45 @@ For reference, the following are the copyright statements that should be used.
 For TS/JS/SCSS files:
 <pre>
 /*
- * Copyright (c) 2018 Veritas Technologies LLC.
+ * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
  */
 </pre>
 
 For HTML files:
 <pre>
 &lt;!--
- * Copyright (c) 2018 Veritas Technologies LLC.
+ * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
 --&gt;
 </pre>
 
 <!-- If you'd like to copy the HTML one, copy the following instead:-->
 
 <!--
- * Copyright (c) 2018 Veritas Technologies LLC.
+ * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
- * Veritas and the Veritas Logo are trademarks
- * or registered trademarks of Veritas Technologies LLC
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
  * or its affiliates in the U.S. and other countries.
  * Other names may be trademarks of their respective owners.
  *
- * IV49-4028-9371-66-15-7
+ * WATERMARK
 -->
 
 #### Auto Translate
