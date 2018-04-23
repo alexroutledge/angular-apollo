@@ -24,10 +24,15 @@ import { RouterModule } from '@angular/router';
 import 'hammerjs';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,9 @@ import { environment } from '../environments/environment';
       }
     }),
     RouterModule.forRoot(ROUTES),
-    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production})
+    ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
+    ApolloModule,
+    HttpLinkModule
   ],
   providers: [
     {
@@ -52,7 +59,19 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private apollo: Apollo,
+    private httpLink: HttpLink
+  ) {
+    this.apollo.create({
+      link: this.httpLink.create({
+        uri: 'http://localhost:3000/graphql'
+      }),
+      cache: new InMemoryCache()
+    });
+  }
+}
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);

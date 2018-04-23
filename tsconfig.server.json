@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "lib": [
+      "es2017",
+      "dom",
+      "esnext.asynciterable"
+    ],
     "target": "es6",
     "module": "commonjs",
     "emitDecoratorMetadata": true,

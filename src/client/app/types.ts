@@ -1,4 +1,4 @@
-<!--
+/*
  * Copyright (c) 2018 Company Name.
  * All rights reserved.
  *
@@ -8,14 +8,17 @@
  * Other names may be trademarks of their respective owners.
  *
  * WATERMARK
--->
+ */
 
-<div class="container">
-  <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Apollo Client For Angular - Sample Application</a>
-  </nav>
-  <angular-apollo-list></angular-apollo-list>
-</div>
+export interface Course {
+    id: number;
+    title: string;
+    author: string;
+    description: string;
+    topic: string;
+    url: string;
+}
 
-
-
+export interface Query {
+    allCourses: Course[];
+}

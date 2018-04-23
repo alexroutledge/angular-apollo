@@ -13,7 +13,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'angular-starter-kit-app',
+  selector: 'angular-apollo-app',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
