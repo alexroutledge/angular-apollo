@@ -66,7 +66,7 @@ class App {
     };
     const getAllCourses = () => {
       return coursesData;
-    }
+    };
     // GraphQL schema
     const schema = buildSchema(`
       type Query {
