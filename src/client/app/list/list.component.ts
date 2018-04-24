@@ -16,36 +16,23 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import gql from 'graphql-tag';
 import { Course, Query } from '../types';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'angular-apollo-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
 
   private courses: Observable<Course[]>;
 
-  constructor(private apollo: Apollo) { }
-
-  public ngOnInit() {
-    this.courses = this.apollo.watchQuery<Query>({
-      query: gql`
-        query allCourses {
-          allCourses {
-            id
-            title
-            author
-            description
-            topic
-            url
-          }
-        }
-      `
-    })
-      .valueChanges
-      .pipe(
-        map((result) => result.data.allCourses)
-      );
+  constructor(private store: Store<any>) {
+    this.store.dispatch({
+      type: 'GET_ITEMS'
+    });
+    this.courses = this.store.select('items')
+    .map((state) => state.data);
   }
+
 }

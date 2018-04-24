@@ -28,6 +28,11 @@ import { ApolloModule, Apollo } from 'apollo-angular';
 import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { ListComponent } from './list/list.component';
+import { StoreModule, StoreFeatureModule  } from '@ngrx/store';
+import { itemReducer } from './reducers/item.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ItemsEffects } from './effects/item.effects';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +52,10 @@ import { ListComponent } from './list/list.component';
     RouterModule.forRoot(ROUTES),
     ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
     ApolloModule,
-    HttpLinkModule
+    HttpLinkModule,
+    StoreModule.forRoot({}),
+    StoreModule.forFeature('items', itemReducer),
+    EffectsModule.forRoot([ItemsEffects])
   ],
   providers: [
     {
@@ -55,22 +63,13 @@ import { ListComponent } from './list/list.component';
       useFactory: appInitializerFactory,
       deps: [TranslateService, Injector],
       multi: true
-    }
+    },
+    DataService,
+    StoreFeatureModule
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(
-    private apollo: Apollo,
-    private httpLink: HttpLink
-  ) {
-    this.apollo.create({
-      link: this.httpLink.create({
-        uri: 'http://localhost:3000/graphql'
-      }),
-      cache: new InMemoryCache()
-    });
-  }
 }
 
 export function HttpLoaderFactory(http: HttpClient) {
