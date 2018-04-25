@@ -67,9 +67,42 @@ class App {
     const getAllCourses = () => {
       return coursesData;
     };
+    const getUsers = () => {
+      return [
+        {
+          id: 1,
+          count: 9
+        },
+        {
+          id: 2,
+          count: 3
+        },
+        {
+          id: 3,
+          count: 9
+        },
+        {
+          id: 4,
+          count: 45
+        },
+        {
+          id: 5,
+          count: 5
+        },
+        {
+          id: 6,
+          count: 9
+        },
+        {
+          id: 7,
+          count: 7
+        }
+      ];
+    };
     // GraphQL schema
     const schema = buildSchema(`
       type Query {
+        allUsers: [User],
         allCourses: [Course],
         course(id: Int!): Course
       },
@@ -80,11 +113,16 @@ class App {
           description: String
           topic: String
           url: String
+      },
+      type User {
+        id: Int
+        count: Int
       }
     `);
 
     // Root resolver
     const rootValue = {
+      allUsers: getUsers,
       allCourses: getAllCourses,
       course: getCourse
     };

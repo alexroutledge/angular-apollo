@@ -9,22 +9,4 @@
  *
  * WATERMARK
  */
-
-export interface Course {
-    id: number;
-    title: string;
-    author: string;
-    description: string;
-    topic: string;
-    url: string;
-}
-
-export interface User {
-    id: number;
-    count: number
-}
-
-export interface Query {
-    allCourses: Course[];
-    allUsers: User[];
-}
+ 

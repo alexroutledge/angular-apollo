@@ -32,12 +32,18 @@ import { StoreModule, StoreFeatureModule  } from '@ngrx/store';
 import { itemReducer } from './reducers/item.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { ItemsEffects } from './effects/item.effects';
+import { UsersEffects } from './effects/users.effects';
 import { DataService } from './services/data.service';
+import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts';
+import { TileComponent } from './tile/tile.component';
+import { usersReducer } from './reducers/users.reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    ListComponent,
+    TileComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,10 @@ import { DataService } from './services/data.service';
     HttpLinkModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature('items', itemReducer),
-    EffectsModule.forRoot([ItemsEffects])
+    StoreModule.forFeature('users', usersReducer),
+    EffectsModule.forRoot([ItemsEffects, UsersEffects]),
+    FormsModule,
+    ChartsModule
   ],
   providers: [
     {

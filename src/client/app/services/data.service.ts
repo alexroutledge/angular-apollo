@@ -54,4 +54,21 @@ export class DataService {
       );
   }
 
+  public getUsers() {
+    return this.apollo.watchQuery<Query>({
+      query: gql`
+        query allUsers {
+          allUsers {
+            id
+            count
+          }
+        }
+      `
+    })
+      .valueChanges
+      .pipe(
+        map((result) => result.data.allUsers)
+      );
+  }
+
 }

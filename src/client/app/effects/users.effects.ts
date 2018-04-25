@@ -20,15 +20,7 @@ import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ItemsEffects {
-
-  @Effect()
-  private getItems$ = this.actions$
-    .ofType('GET_ITEMS')
-    .switchMap((action) =>
-      this.dataService.getItems()
-        .map((items) => ({ type: 'GET_ITEMS_SUCCESS', payload: items }))
-        .catch(() => Observable.of({ type: 'GET_ITEMS_ERROR' })));
+export class UsersEffects {
 
   @Effect() private getUsers$ = this.actions$
     .ofType('GET_USERS')

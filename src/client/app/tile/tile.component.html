@@ -1,0 +1,27 @@
+<!--
+ * Copyright (c) 2018 Company Name.
+ * All rights reserved.
+ *
+ * Company Name and the Company Name logo are trademarks
+ * or registered trademarks of Company Name
+ * or its affiliates in the U.S. and other countries.
+ * Other names may be trademarks of their respective owners.
+ *
+ * WATERMARK
+-->
+
+<div class="col-lg-4">
+  <div id="activeUsers" class="chartContainer">
+    <h1>Active Users</h1>
+    <canvas
+        baseChart
+        [chartType]="'line'"
+        width="940"
+        height="300"
+        [datasets]="users | async"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+        [legend]="false">
+    </canvas>
+  </div>
+</div>
