@@ -21,7 +21,7 @@ export interface Course {
 
 export interface User {
     id: number;
-    count: number
+    count: number;
 }
 
 export interface Query {
