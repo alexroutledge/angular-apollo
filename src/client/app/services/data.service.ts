@@ -17,6 +17,9 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import gql from 'graphql-tag';
 import { Course, Query } from '../types';
 import { map } from 'rxjs/operators';
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import { split } from 'apollo-link';
 
 @Injectable()
 export class DataService {
@@ -25,10 +28,27 @@ export class DataService {
     private apollo: Apollo,
     private httpLink: HttpLink
   ) {
-    this.apollo.create({
-      link: this.httpLink.create({
+    const subscriptionLink = new WebSocketLink({
+      uri:
+        'ws://localhost:3000/subscriptions',
+      options: {
+        reconnect: true,
+        connectionParams: {}
+      }
+    });
+
+    const link = split(
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+      },
+      subscriptionLink,
+      this.httpLink.create({
         uri: 'http://localhost:3000/graphql'
-      }),
+      })
+    );
+    this.apollo.create({
+      link,
       cache: new InMemoryCache()
     });
   }
@@ -55,20 +75,18 @@ export class DataService {
   }
 
   public getUsers() {
-    return this.apollo.watchQuery<Query>({
-      query: gql`
-        query allUsers {
-          allUsers {
-            id
-            count
+    return this.apollo
+      .subscribe({
+        query: gql`
+          subscription {
+            userAdded(channelId: 1) {
+              id
+              count
+            }
           }
-        }
-      `
-    })
-      .valueChanges
-      .pipe(
-        map((result) => result.data.allUsers)
-      );
+        `
+      })
+      .map((result) => [result.data.userAdded]);
   }
 
 }

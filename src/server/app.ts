@@ -10,11 +10,19 @@
  * WATERMARK
  */
 
-import * as express from 'express';
-import * as path from 'path';
-import * as express_graphql from 'express-graphql';
 import { buildSchema } from 'graphql';
-import * as cors from 'cors';
+import * as path from 'path';
+import { Constants } from './constants';
+import express from 'express';
+import {
+  graphqlExpress,
+  graphiqlExpress,
+} from 'graphql-server-express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import { execute, subscribe } from 'graphql';
+import { createServer } from 'http';
+import { SubscriptionServer } from 'subscriptions-transport-ws';
 
 class App {
   public express;
@@ -26,6 +34,22 @@ class App {
 
   private mountRoutes(): void {
     const app = express();
+    const ws = createServer(app);
+    const PORT = Constants.PORT;
+
+    ws.listen(PORT, () => {
+      console.log(`GraphQL Server is now running on http://localhost:${PORT}`);
+      // Set up the WebSocket for handling GraphQL subscriptions
+      const a = new SubscriptionServer({
+        execute,
+        subscribe,
+        schema
+      }, {
+        server: ws,
+        path: '/subscriptions',
+      });
+    });
+
     const router = express.Router();
     const staticRoot = path.resolve(__dirname, '../../dist');
     const coursesData = [
@@ -135,10 +159,12 @@ class App {
         message: 'Hello World!'
       });
     });
-    app.use('/graphql', cors(), express_graphql({
-      schema,
-      rootValue,
-      graphiql: false
+    app.use('/graphql', bodyParser.json(), graphqlExpress({
+      schema
+    }));
+    app.use('/graphiql', graphiqlExpress({
+      endpointURL: '/graphql',
+      subscriptionsEndpoint: `ws://localhost:4000/subscriptions`
     }));
     this.express.use('/', app);
   }

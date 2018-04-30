@@ -11,10 +11,11 @@
  */
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { isUndefined, toNumber } from 'lodash';
+import { isUndefined, toNumber, get } from 'lodash';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { random } from 'lodash';
 
 @Component({
   selector: 'angular-apollo-tile',
@@ -48,9 +49,14 @@ export class TileComponent {
     });
     this.users = this.store.select('users')
     .map((state) => {
+      const count = state.data.map((item) => item.count);
+      const items = Array
+      .apply(null, {length: 6})
+      .map(Number.call, Number)
+      .map((item) => random(1, count) * count);
       return [
         {
-          data: state.data.map((item) => item.count),
+          data: items,
           label: 'Active Users'
         }
       ];
