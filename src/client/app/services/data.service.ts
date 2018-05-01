@@ -16,10 +16,14 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import gql from 'graphql-tag';
 import { Course, Query } from '../types';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
 import { split } from 'apollo-link';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/combineLatest';
+import { merge, clone } from 'lodash';
 
 @Injectable()
 export class DataService {
@@ -75,18 +79,42 @@ export class DataService {
   }
 
   public getUsers() {
-    return this.apollo
-      .subscribe({
-        query: gql`
-          subscription {
-            userAdded(channelId: 1) {
-              id
-              count
-            }
+    const query = this.apollo.watchQuery<Query>({
+      query: gql`
+        query allUsers {
+          allUsers {
+            id
+            count
           }
-        `
-      })
-      .map((result) => [result.data.userAdded]);
+        }
+      `
+    })
+    .valueChanges
+    .map((result) => [result.data.allUsers]);
+    const subscription = this.apollo
+    .subscribe({
+      query: gql`
+        subscription {
+          userAdded(channelId: 1) {
+            id
+            count
+          }
+        }
+      `
+    })
+    .map((result) => [result.data.userAdded]);
+    return Observable.combineLatest([
+      query,
+      subscription
+    ])
+    .switchMap((data) => {
+      const [queryResults, subscriptionResults] = data;
+      const dataset = [
+        ...queryResults,
+        ...[subscriptionResults]
+      ];
+      return dataset;
+    });
   }
 
 }
